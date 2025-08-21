@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const apiUrl = "https://68a4d1842a3deed2960bcba5.mockapi.io/ex/customer";
+    
+    fetch(apiUrl)
+    .then(response => {
+    if(!response.ok){
+        throw new Error('A resposta da rede nao esta boa')
+    }
+    return response.json()
+    })
+    .then(data => {
+        console.log(data);
+        const nome = document.querySelector("#Nome");
+        nome.innerHTML = data[0].name;
+    })
+    .catch(error => console.error("erro na busca de dados", error));
+
+</script>
+</head>
+<body>
+    <p>Nome: <span id="Nome"></span></p>
+</body>
+
+</html>
