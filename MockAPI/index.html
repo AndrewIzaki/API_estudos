@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        const apiUrl = "https://68a4d1842a3deed2960bcba5.mockapi.io/ex/customer";
-    
+    <script src="vue.js"></script>
+</head>
+
+
+<body>
+    <div id="app">
+    <p>Nome: <span id="Nome"></span></p>
+    <p>{{id}}</p>
+    </div>
+</body>
+
+        <script>
+    const apiUrl = "https://68a4d1842a3deed2960bcba5.mockapi.io/ex/customer";
     fetch(apiUrl)
     .then(response => {
     if(!response.ok){
@@ -21,10 +31,12 @@
     })
     .catch(error => console.error("erro na busca de dados", error));
 
-</script>
-</head>
-<body>
-    <p>Nome: <span id="Nome"></span></p>
-</body>
+    const vm = new Vue({
+      el: "#app",
+        data: {
+            id: 1,
+        }
+    })
+    </script>
 
 </html>
