@@ -11,12 +11,20 @@
 <body>
     <div id="app">
     <p>Nome: <span id="Nome"></span></p>
-    <p>{{id}}</p>
+    <p @click="clicado">{{id}}</p>
     <p>Valor adicionado na branch list</p>
     </div>
 </body>
 
         <script>
+    
+    const vm = new Vue({
+      el: "#app",
+        data: {
+            id: 1,
+        },
+        methods: {
+            fetch(){
     const apiUrl = "https://68a4d1842a3deed2960bcba5.mockapi.io/ex/customer";
     fetch(apiUrl)
     .then(response => {
@@ -32,12 +40,14 @@
     })
     .catch(error => console.error("erro na busca de dados", error));
 
-    const vm = new Vue({
-      el: "#app",
-        data: {
-            id: 1,
+            },
+            clicado(){
+                alert('clicou')
+            }
         }
+
     })
+    vm.fetch();
     </script>
 
 </html>
