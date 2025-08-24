@@ -10,21 +10,26 @@
 
 <body>
     <div id="app">
-    <p>Nome: <span id="Nome"></span></p>
+    <ul>
+        <li v-for="name in names">{{name}}</li>
+    </ul>
+
+
     <p @click="clicado">{{id}}</p>
     <p>Valor adicionado na branch list</p>
     </div>
 </body>
 
-        <script>
-    
+    <script>
     const vm = new Vue({
       el: "#app",
-        data: {
+    data: {
+            names: [],
+            frutas: ['banana', 'maça', 'laranja'],
             id: 1,
         },
         methods: {
-            fetch(){
+    fetch(){
     const apiUrl = "https://68a4d1842a3deed2960bcba5.mockapi.io/ex/customer";
     fetch(apiUrl)
     .then(response => {
@@ -33,18 +38,21 @@
     }
     return response.json()
     })
-    .then(data => {
-        console.log(data);
-        const nome = document.querySelector("#Nome");
-        nome.innerHTML = data[0].name;
+    .then(dados => {
+        console.log(dados);
+        dados.forEach(el =>{
+            //ele pega o nome de cada objeto e joga no array names
+            this.names.push(el.name)
+        })
+        console.log(this.names);
     })
     .catch(error => console.error("erro na busca de dados", error));
 
-            },
-            clicado(){
-                alert('clicou')
-            }
+    },
+    clicado(){
+            alert('clicou')
         }
+    }
 
     })
     vm.fetch();
