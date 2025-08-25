@@ -14,48 +14,71 @@
         <li v-for="name in names">{{name}}</li>
     </ul>
 
+    <button @click="Post">Adicionar</button>
 
-    <p @click="clicado">{{id}}</p>
+    <button @Click="DEL">Deletar</button>
     <p>Valor adicionado na branch list</p>
     </div>
 </body>
 
-    <script>
-    const vm = new Vue({
-      el: "#app",
-    data: {
-            names: [],
-            frutas: ['banana', 'maça', 'laranja'],
-            id: 1,
-        },
-        methods: {
-    fetch(){
-    const apiUrl = "https://68a4d1842a3deed2960bcba5.mockapi.io/ex/customer";
-    fetch(apiUrl)
-    .then(response => {
-    if(!response.ok){
-        throw new Error('A resposta da rede nao esta boa')
-    }
-    return response.json()
-    })
-    .then(dados => {
-        console.log(dados);
-        dados.forEach(el =>{
-            //ele pega o nome de cada objeto e joga no array names
-            this.names.push(el.name)
-        })
-        console.log(this.names);
-    })
-    .catch(error => console.error("erro na busca de dados", error));
-
+<script>
+const vm = new Vue({
+    el: "#app",
+data: 
+    {
+        names: [],
+        frutas: ['banana', 'maça', 'laranja'],
+        id: 1,
+        apiUrl: "https://68a4d1842a3deed2960bcba5.mockapi.io/ex/customer",
+        nomeTeste: "Kamilly Raissa Alves Cardoso Barcelos"
     },
-    clicado(){
-            alert('clicou')
-        }
+methods: 
+{
+    Get(){
+            const apiUrl = this.apiUrl;
+                fetch(apiUrl)
+                    .then(response => {
+                        if(!response.ok){
+                            throw new Error('A resposta da rede nao esta boa')
+                        }
+                        return response.json()
+                        })
+                        .then(dados => {
+                            console.log(dados);
+                            dados.forEach(el =>{
+                                //ele pega o nome de cada objeto e joga no array names
+                                this.names.push(el.name)
+                            })
+                            console.log(this.names);
+                        })
+                        .catch(error => console.error("erro na busca de dados", error));
+        },
+    Post(){
+            const apiUrl = this.apiUrl;
+                
+                // Criação do request
+                const request1 = new Request(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({createdAt: "??", name: "André", avatar: "??", id: "??"}),
+                })
+
+                const request2 = request1.clone();
+
+                //response 1
+                const response1 = fetch(request1)
+                console.log(response1.status);
+                Get();
+    },
+    Delet(){
+
     }
 
-    })
-    vm.fetch();
-    </script>
+    }
+});    
+vm.Get();
+</script>
 
 </html>
