@@ -16,7 +16,7 @@
 
     <button @click="Post">Adicionar</button>
 
-    <button @Click="DEL">Deletar</button>
+    <button @Click="Delete">Deletar</button>
     <p>Valor adicionado na branch list</p>
     </div>
 </body>
@@ -50,6 +50,7 @@ methods:
                                 this.names.push(el.name)
                             })
                             console.log(this.names);
+                            console.log(dados)
                         })
                         .catch(error => console.error("erro na busca de dados", error));
         },
@@ -72,7 +73,15 @@ methods:
                 console.log(response1.status);
                 Get();
     },
-    Delet(){
+    Delete(){
+        const apiUrl = this.apiUrl +"/2"
+        const delData = {id: 1}
+
+        fetch(apiUrl, {
+            method:"DELETE",
+        })
+        .then(r => {return r.json()})
+        .then(data => console.log(data))
 
     }
 
