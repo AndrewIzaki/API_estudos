@@ -14,8 +14,10 @@
         <li v-for="name in names">{{name}}</li>
     </ul>
 
-    <button @click="Post">Adicionar</button>
+    <input type="text" v-model="UserName"></input>
 
+    <button @click="teste">Testar v-model</button>
+    <button @click="Post">Adicionar</button>
     <button @Click="Delete">Deletar</button>
     <button @click="put">Atualizar</button>
     <p>Valor adicionado na branch list</p>
@@ -31,10 +33,14 @@ data:
         frutas: ['banana', 'maça', 'laranja'],
         id: 1,
         apiUrl: "https://68a4d1842a3deed2960bcba5.mockapi.io/ex/customer",
-        nomeTeste: "Kamilly Raissa Alves Cardoso Barcelos"
+        nomeTeste: "Kamilly Raissa Alves Cardoso Barcelos",
+        UserName: "",
     },
 methods: 
 {
+    teste(){
+        console.log(this.testes)
+    },
     Get(){
             const apiUrl = this.apiUrl;
                 fetch(apiUrl)
@@ -57,6 +63,7 @@ methods:
         },
     Post(){
             const apiUrl = this.apiUrl;
+            const names = this.UserName;
                 
                 // Criação do request
                 const request1 = new Request(apiUrl, {
@@ -64,7 +71,7 @@ methods:
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({createdAt: "??", name: "André", avatar: "??", id: "??"}),
+                    body: JSON.stringify({name: names}),
                 })
 
                 const request2 = request1.clone();
@@ -72,10 +79,10 @@ methods:
                 //response 1
                 const response1 = fetch(request1)
                 console.log(response1.status);
-                Get();
     },
     Delete(){
         const apiUrl = this.apiUrl +"/2"
+        const names = this.UserName;
         const delData = {id: 1}
 
         fetch(apiUrl, {
