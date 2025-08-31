@@ -17,6 +17,7 @@
     <button @click="Post">Adicionar</button>
 
     <button @Click="Delete">Deletar</button>
+    <button @click="put">Atualizar</button>
     <p>Valor adicionado na branch list</p>
     </div>
 </body>
@@ -82,6 +83,36 @@ methods:
         })
         .then(r => {return r.json()})
         .then(data => console.log(data))
+    },
+    put(){
+        const apiUrl = this.apiUrl + "/3"
+        UpdateData = {
+            createdAt: "??", name: "Kamilly Raissa Alves Cardoso Barcelos update", avatar: "??", id: "??"
+        }
+        const JsonData = JSON.stringify(UpdateData)
+
+        const options = {
+            method: "PUT",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JsonData
+        }
+
+        fetch(apiUrl, options)
+            .then(response => {
+                if(!response.ok){
+                    throw new Error("Resposta de rede não OK")
+                }
+                return response.json()            
+            })
+            .then(data => {
+                console.log("atualiazado com sucesso" + data)
+            })// caso de errro na operação do fetch
+            .catch(error => {
+                console.error(error)
+            })
+    
 
     }
 
