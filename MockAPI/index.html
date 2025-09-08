@@ -14,9 +14,7 @@
         <li v-for="name in names">{{name}}</li>
     </ul>
 
-    <input type="text" v-model="UserName"></input>
-
-    <button @click="teste">Testar v-model</button>
+    <input id="inputText" type="text" v-model="UserName"/>
     <button @click="Post">Adicionar</button>
     <button @Click="Delete">Deletar</button>
     <button @click="put">Atualizar</button>
@@ -35,9 +33,19 @@ data:
         apiUrl: "https://68a4d1842a3deed2960bcba5.mockapi.io/ex/customer",
         nomeTeste: "Kamilly Raissa Alves Cardoso Barcelos",
         UserName: "",
+        testes: "funcionou"
     },
 methods: 
 {
+    keybind(){
+        document.onkeypress = function(e){
+            if(e.key == "x"){
+                window.event.preventDefault();
+                console.log("apertou a tecla " + e.key);
+                document.getElementById("inputText").focus();
+            }
+        }
+    },
     teste(){
         console.log(this.testes)
     },
@@ -119,13 +127,11 @@ methods:
             .catch(error => {
                 console.error(error)
             })
-    
-
-    }
-
+    }   
     }
 });    
 vm.Get();
-</script>
+vm.keybind();
+</script>   
 
 </html>
