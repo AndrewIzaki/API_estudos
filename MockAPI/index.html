@@ -11,10 +11,15 @@
 <body>
     <div id="app">
     <ul>
-        <li v-for="name in names">{{name}}</li>
+        <li v-for="name in names"><button @click="">{{name}}</button></li>
     </ul>
-
-    <input id="inputText" type="text" v-model="UserName"/>
+    <form>
+        <label for="inputText">Nome:</label>
+        <input id="inputText" type="text" v-model="UserName"/>
+        <label for="update">Atualizar:</label>
+        <input id="update" type="text"/>
+        <input id="updateId" type="text"/> 
+    </form>
     <button @click="Post">Adicionar</button>
     <button @Click="Delete">Deletar</button>
     <button @click="put">Atualizar</button>
@@ -28,12 +33,8 @@ const vm = new Vue({
 data: 
     {
         names: [],
-        frutas: ['banana', 'maça', 'laranja'],
-        id: 1,
         apiUrl: "https://68a4d1842a3deed2960bcba5.mockapi.io/ex/customer",
-        nomeTeste: "Kamilly Raissa Alves Cardoso Barcelos",
         UserName: "",
-        testes: "funcionou"
     },
 methods: 
 {
